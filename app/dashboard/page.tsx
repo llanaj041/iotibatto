@@ -1,9 +1,15 @@
 export default function DashboardPage() {
   return (
     <main className="min-h-screen bg-black text-white p-10">
-      <h1 className="text-4xl font-bold">
+      <h1 className="text-4xl font-bold mb-6">
         Dashboard IoTiBatto 🚀
       </h1>
+
+      <div className="bg-zinc-900 p-6 rounded-xl">
+        <p className="text-lg">
+          Benvenuto nel dashboard del nuovo sito.
+        </p>
+      </div>
     </main>
   );
 }
