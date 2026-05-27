@@ -1,3 +1,9 @@
 export default function RegisterPage() {
-  return <h1>Pagina Registrazione</h1>;
+  return (
+    <main className="min-h-screen bg-black text-white flex items-center justify-center">
+      <h1 className="text-4xl font-bold">
+        Pagina Registrazione 🚀
+      </h1>
+    </main>
+  );
 }
