@@ -19,6 +19,8 @@ import {
   useState,
 } from "react";
 
+import ImageUpload from "../components/ImageUpload";
+
 export default function DashboardPage() {
 
   const { user } = useAuth();
@@ -32,6 +34,8 @@ export default function DashboardPage() {
   const [title, setTitle] = useState("");
 
   const [content, setContent] = useState("");
+
+  const [imageUrl, setImageUrl] = useState("");
 
   async function logout() {
     await signOut(auth);
@@ -61,11 +65,13 @@ export default function DashboardPage() {
     await addDoc(collection(db, "posts"), {
       title,
       content,
+      imageUrl,
       author: user?.email,
     });
 
     setTitle("");
     setContent("");
+    setImageUrl("");
 
     fetchPosts();
   }
@@ -192,6 +198,16 @@ export default function DashboardPage() {
               className="w-full bg-[#1E293B] border border-gray-700 p-4 rounded-2xl outline-none h-40"
             />
 
+            <ImageUpload setImageUrl={setImageUrl} />
+
+            {imageUrl && (
+              <img
+                src={imageUrl}
+                alt="preview"
+                className="w-64 rounded-2xl"
+              />
+            )}
+
             <button
               onClick={createPost}
               className="bg-blue-600 hover:bg-blue-500 transition px-8 py-4 rounded-2xl font-semibold"
@@ -217,11 +233,19 @@ export default function DashboardPage() {
                 {post.title}
               </h2>
 
-              <p className="text-gray-300 text-lg">
+              <p className="text-gray-300 text-lg mb-5">
                 {post.content}
               </p>
 
-              <p className="text-blue-400 mt-6">
+              {post.imageUrl && (
+                <img
+                  src={post.imageUrl}
+                  alt="post"
+                  className="rounded-2xl mb-5 max-h-[500px]"
+                />
+              )}
+
+              <p className="text-blue-400">
                 {post.author}
               </p>
 
